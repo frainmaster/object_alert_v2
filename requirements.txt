@@ -4,4 +4,3 @@ scikit-image
 tensorflow
 opencv-python
 XlsxWriter
-tkinter
