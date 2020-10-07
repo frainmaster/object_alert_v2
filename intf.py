@@ -18,7 +18,7 @@ class ObjectAlertApp(Tk):
 		Tk.__init__(self)
 		self.title('Object Alert')
 		# self.resizable(False, False)
-		self.geometry('690x640')
+		self.geometry('1080x640')
 
 		# ATTRIBUTES
 		# model dropdown
@@ -89,7 +89,13 @@ class ObjectAlertApp(Tk):
 			height = self.img_height,
 			cursor = 'cross')
 		self.canvas.create_image(0, 0, image = self.canvas_bg_img, anchor = 'nw')
-		self.canvas.grid(row = 4, column = 0, columnspan = 10)
+		# self.canvas.grid(row = 4, column = 0, columnspan = 10)
+		self.canvas.grid(row = 2, column = 6, rowspan = 7)
+		self.btn_rotate = Button(
+			self,
+			width = 15,
+			text = 'Rotate',
+			command = self.rotate_vid)
 		self.btn_get_points = Button(
 			self,
 			width = 15,
@@ -141,6 +147,7 @@ class ObjectAlertApp(Tk):
 			# enable drawing box only after video is selected
 			self.canvas.bind('<Button-1>', self.start_point)
 			self.canvas.bind('<B1-Motion>', self.end_point)
+			self.btn_rotate.grid(row = 5, column = 1)
 			self.btn_get_points.grid(row = 5, column = 2)
 			self.btn_clear_canvas.grid(row = 5, column = 3)
 			cap = cv2.VideoCapture('input/' + self.getFileNameWithoutPath(filename))
@@ -192,6 +199,9 @@ class ObjectAlertApp(Tk):
 
 	def print_points(self):
 		self.log_msg('point: ' + str([self.start_x, self.start_y, self.x, self.y]))
+
+	def rotate_vid(self):
+		print('test')
 
 	def end_point(self, event):
 		self.erase_box()
